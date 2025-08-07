@@ -1,0 +1,3 @@
+C:/Users/lumi/Desktop/interview/opengl/build/CMakeFiles/OpenGLDemo.dir
+C:/Users/lumi/Desktop/interview/opengl/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/lumi/Desktop/interview/opengl/build/CMakeFiles/ZERO_CHECK.dir

@@ -1,0 +1,5 @@
+﻿  Building Custom Rule C:/Users/lumi/Desktop/interview/opengl/CMakeLists.txt
+  main.cpp
+  glad.c
+LINK : warning LNK4098: 默认库“MSVCRT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
+  OpenGLDemo.vcxproj -> C:\Users\lumi\Desktop\interview\opengl\build_batch\bin\Debug\OpenGLDemo.exe

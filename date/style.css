@@ -1,0 +1,344 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ffeef8 0%, #f0f8ff 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    padding: 30px;
+    text-align: center;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.settings label {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.settings input {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.settings button {
+    padding: 10px 20px;
+    background: #ff6b9d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.settings button:hover {
+    background: #ff5a8a;
+}
+
+.pregnancy-info {
+    padding: 20px 30px;
+    background: #f8f9ff;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.info-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h3 {
+    color: #ff6b9d;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.info-card p {
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.info-card span {
+    color: #ff6b9d;
+    font-weight: bold;
+}
+
+.calendar-container {
+    padding: 30px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header button {
+    background: #ff6b9d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background 0.3s;
+}
+
+.calendar-header button:hover {
+    background: #ff5a8a;
+}
+
+.calendar-header h2 {
+    color: #333;
+    font-size: 1.5em;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.calendar-day {
+    background: white;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-height: 85px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.date-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 4px;
+}
+
+.week-info-top {
+    font-size: 0.85em;
+    color: #333;
+    line-height: 1.2;
+    text-align: center;
+    font-weight: 600;
+    background: rgba(255, 107, 157, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 107, 157, 0.3);
+}
+
+.date-number {
+    font-size: 1.3em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    margin: 2px 0;
+}
+
+.month-label {
+    color: #ff6b9d;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    margin: 2px 0;
+}
+
+.lunar-date {
+    font-size: 0.85em;
+    color: #555;
+    line-height: 1.2;
+    text-align: center;
+    font-weight: 500;
+}
+
+.calendar-day:hover {
+    background: #f0f0f0;
+}
+
+.calendar-day.other-month {
+    color: #ccc;
+    background: #f8f8f8;
+}
+
+.calendar-day.today {
+    background: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+.calendar-day.last-period {
+    background: #ff4757;
+    color: white;
+}
+
+.calendar-day.conception {
+    background: #ffa502;
+    color: white;
+}
+
+.calendar-day.due-date {
+    background: #2ed573;
+    color: white;
+    font-weight: bold;
+}
+
+.calendar-day.pregnancy-period {
+    background: #ffb8d1;
+    color: #333;
+}
+
+.calendar-header-row {
+    background: #ff6b9d;
+    color: white;
+    font-weight: bold;
+    padding: 10px 5px;
+    text-align: center;
+}
+
+.week-info {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 2px;
+}
+
+.legend {
+    padding: 20px 30px;
+    background: #f8f9ff;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.legend-color.today {
+    background: #4CAF50;
+}
+
+.legend-color.last-period {
+    background: #ff4757;
+}
+
+.legend-color.conception {
+    background: #ffa502;
+}
+
+.legend-color.due-date {
+    background: #2ed573;
+}
+
+.legend-color.pregnancy-period {
+    background: #ffb8d1;
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        border-radius: 10px;
+    }
+    
+    header {
+        padding: 20px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .settings {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .calendar-container {
+        padding: 20px;
+    }
+    
+    .calendar-day {
+        min-height: 75px;
+        padding: 8px 4px;
+        font-size: 0.9em;
+    }
+    
+    .date-number {
+        font-size: 1.2em;
+    }
+    
+    .month-label {
+        font-size: 1.0em;
+    }
+    
+    .lunar-date {
+        font-size: 0.8em;
+    }
+    
+    .week-info-top {
+        font-size: 0.8em;
+    }
+    
+    .legend {
+        padding: 15px 20px;
+        gap: 15px;
+    }
+}

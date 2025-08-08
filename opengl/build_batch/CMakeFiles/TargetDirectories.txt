@@ -1,4 +1,0 @@
-C:/Users/lumi/Desktop/interview/opengl/build_batch/CMakeFiles/OpenGLDemo.dir
-C:/Users/lumi/Desktop/interview/opengl/build_batch/CMakeFiles/batch_rendering.dir
-C:/Users/lumi/Desktop/interview/opengl/build_batch/CMakeFiles/ALL_BUILD.dir
-C:/Users/lumi/Desktop/interview/opengl/build_batch/CMakeFiles/ZERO_CHECK.dir

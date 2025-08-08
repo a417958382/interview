@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "title": "JavaScript基础",
+      "question": "请解释JavaScript中的闭包概念，并给出一个实际应用的例子。",
+      "type": "text",
+      "points": 10
+    },
+    {
+      "id": 2,
+      "title": "算法题",
+      "question": "实现一个函数，判断一个字符串是否为回文字符串。要求时间复杂度为O(n)。",
+      "type": "code",
+      "points": 15
+    },
+    {
+      "id": 3,
+      "title": "CSS布局",
+      "question": "使用CSS Flexbox实现一个三列布局，左右两列固定宽度200px，中间列自适应。",
+      "type": "code",
+      "points": 12
+    },
+    {
+      "id": 4,
+      "title": "React概念",
+      "question": "解释React中的虚拟DOM概念，以及它相比直接操作DOM的优势。",
+      "type": "text",
+      "points": 8
+    },
+    {
+      "id": 5,
+      "title": "数据结构",
+      "question": "实现一个简单的栈(Stack)数据结构，包含push、pop、peek和isEmpty方法。",
+      "type": "code",
+      "points": 20
+    }
+  ]
+}

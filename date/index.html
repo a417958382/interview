@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>怀孕日历</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>怀孕日历</h1>
+            <div class="settings">
+                <label for="lastPeriod">末次例假日期：</label>
+                <input type="date" id="lastPeriod">
+                <button id="calculateBtn">计算</button>
+            </div>
+        </header>
+
+        <div class="pregnancy-info" id="pregnancyInfo" style="display: none;">
+            <div class="info-card">
+                <h3>怀孕信息</h3>
+                <p><strong>怀孕周数：</strong><span id="weeksPregnant"></span></p>
+                <p><strong>预产期：</strong><span id="dueDate"></span></p>
+                <p><strong>距离预产期：</strong><span id="daysLeft"></span></p>
+            </div>
+        </div>
+
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <button id="prevMonth">&lt;</button>
+                <h2 id="currentMonth"></h2>
+                <button id="nextMonth">&gt;</button>
+            </div>
+            <div class="calendar" id="calendar"></div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <span class="legend-color today"></span>
+                <span>今天</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color last-period"></span>
+                <span>末次例假</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color conception"></span>
+                <span>受孕日</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color due-date"></span>
+                <span>预产期</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color pregnancy-period"></span>
+                <span>怀孕期间</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="lunar.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

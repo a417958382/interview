@@ -1,0 +1,25 @@
+{
+  "name": "project_ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "rm -rf dist",
+    "test-kmp": "tsx src/test-kmp.ts",
+    "test-reorder": "tsx src/test-reorder-list.ts",
+    "test-dfs": "tsx src/test-game-map-dfs.ts",
+    "test-kadane": "tsx src/test-kadane.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^24.2.1",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2"
+  }
+}

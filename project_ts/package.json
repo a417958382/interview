@@ -12,7 +12,14 @@
     "test-kmp": "tsx src/test-kmp.ts",
     "test-reorder": "tsx src/test-reorder-list.ts",
     "test-dfs": "tsx src/test-game-map-dfs.ts",
-    "test-kadane": "tsx src/test-kadane.ts"
+    "test-kadane": "tsx src/test-kadane.ts",
+    "test-algorithms": "tsx src/test-algorithms.ts",
+    "test-comparison": "tsx src/test-comparison-count.ts",
+    "test-advanced": "tsx src/test-advanced-search.ts",
+    "test-shuffle": "tsx src/test-shuffle-algorithms.ts",
+    "test-fishing": "tsx src/test-fishing-game-algorithms.ts",
+    "test-match3": "tsx src/test-match3-game-algorithms.ts",
+    "test-slg": "tsx src/test-slg-game-algorithms.ts"
   },
   "keywords": [],
   "author": "",

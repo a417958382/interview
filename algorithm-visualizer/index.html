@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算法可视化演示</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>算法可视化演示</h1>
+            <p>通过动画直观地理解各种排序和查找算法的执行过程</p>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="algorithm-select">选择算法：</label>
+                <select id="algorithm-select">
+                    <optgroup label="排序算法">
+                        <option value="bubbleSort">冒泡排序</option>
+                        <option value="selectionSort">选择排序</option>
+                        <option value="insertionSort">插入排序</option>
+                        <option value="quickSort">快速排序</option>
+                        <option value="mergeSort">归并排序</option>
+                    </optgroup>
+                    <optgroup label="查找算法">
+                        <option value="linearSearch">线性查找</option>
+                        <option value="binarySearch">二分查找</option>
+                        <option value="interpolationSearch">插值查找</option>
+                        <option value="jumpSearch">跳跃查找</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="array-size">数组大小：</label>
+                <input type="range" id="array-size" min="5" max="50" value="20">
+                <span id="size-value">20</span>
+            </div>
+
+            <div class="control-group">
+                <label for="speed">动画速度：</label>
+                <input type="range" id="speed" min="1" max="10" value="5">
+                <span id="speed-value">5</span>
+            </div>
+
+            <div class="control-group">
+                <label for="target-value">查找目标（仅查找算法）：</label>
+                <input type="number" id="target-value" value="25" min="1" max="100">
+            </div>
+
+            <div class="control-buttons">
+                <button id="generate-btn">生成新数组</button>
+                <button id="start-btn">开始演示</button>
+                <button id="pause-btn" disabled>暂停</button>
+                <button id="reset-btn">重置</button>
+            </div>
+        </div>
+
+        <div class="visualization-container">
+            <div class="array-container" id="array-container">
+                <!-- 数组元素将在这里动态生成 -->
+            </div>
+            
+            <div class="info-panel">
+                <div class="algorithm-info">
+                    <h3 id="algorithm-name">选择算法开始演示</h3>
+                    <p id="algorithm-description">请选择一个算法来查看其执行过程</p>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">比较次数：</span>
+                        <span class="stat-value" id="comparisons">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">交换次数：</span>
+                        <span class="stat-value" id="swaps">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">执行时间：</span>
+                        <span class="stat-value" id="execution-time">0ms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <h4>颜色说明：</h4>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="color-box default"></div>
+                    <span>默认状态</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box comparing"></div>
+                    <span>正在比较</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box swapping"></div>
+                    <span>正在交换</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box sorted"></div>
+                    <span>已排序</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box pivot"></div>
+                    <span>基准元素（快速排序）</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box target"></div>
+                    <span>目标元素（查找算法）</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

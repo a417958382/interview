@@ -272,7 +272,7 @@ export function mergeSort(arr: number[]): number[] {
 
   const mid = Math.floor(arr.length / 2);
   const left = mergeSort(arr.slice(0, mid));
-  const right = mergeSort(arr.slice(mid, mid + arr.length));
+  const right = mergeSort(arr.slice(mid, arr.length));
 
   return merge(left, right);
 }
@@ -393,6 +393,7 @@ export function binarySearchRecursive(arr: number[], target: number): number {
 
   return search(0, arr.length - 1);
 }
+
 
 /**
  * 二分查找 (Binary Search) - 迭代版本

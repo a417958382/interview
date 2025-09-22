@@ -17,16 +17,10 @@ type Grid = number[][];
 // 创建演示网格
 function createDemoGrid(): Grid {
   return [
-    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 1, 0, 1, 1, 1, 1, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 1, 1, 0],
-    [0, 1, 1, 1, 0, 1, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
-    [0, 1, 1, 1, 0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1],
+    [0, 1, 0, 1],
+    [0, 1, 0, 0],
+    [0, 0, 0, 0],
   ];
 }
 
@@ -100,7 +94,7 @@ function demonstrateAlgorithm(
     console.log(`   路径长度: ${pathLength.toFixed(2)}`);
     console.log(`   步数: ${path.length}`);
     console.log(`   执行时间: ${executionTime}ms`);
-    console.log(`   路径: ${path.map(p => `(${p.x},${p.y})`).join(' → ')}`);
+    console.log(`   路径: ${path.map((p: Point) => `(${p.x},${p.y})`).join(' → ')}`);
     
     // 显示路径可视化
     printGrid(grid, path, start, goal);
@@ -128,11 +122,11 @@ function compareAlgorithms(
   const algorithms = [
     { name: 'Dijkstra', fn: findPathDijkstra },
     { name: 'A*', fn: findPathHeap },
-    { name: 'JPS', fn: findPathJPS },
-    { name: 'BFS', fn: findPathBFS },
-    { name: 'DFS', fn: findPathDFS },
-    { name: 'GBFS', fn: findPathGBFS },
-    { name: 'Bidirectional', fn: findPathBidirectional },
+    // { name: 'JPS', fn: findPathJPS },
+    // { name: 'BFS', fn: findPathBFS },
+    // { name: 'DFS', fn: findPathDFS },
+    // { name: 'GBFS', fn: findPathGBFS },
+    // { name: 'Bidirectional', fn: findPathBidirectional },
   ];
   
   const results: Array<{
@@ -197,7 +191,7 @@ function main() {
   
   const grid = createDemoGrid();
   const start = { x: 0, y: 0 };
-  const goal = { x: 9, y: 9 };
+  const goal = { x: 3, y: 3 };
   
   // 显示原始网格
   console.log('🗺️  原始网格:');
@@ -207,16 +201,16 @@ function main() {
   compareAlgorithms(grid, start, goal, false);
   
   // 算法比较（8邻接）
-  compareAlgorithms(grid, start, goal, true);
+  // compareAlgorithms(grid, start, goal, true);
   
   // 详细演示几个主要算法
-  console.log('🔍 详细算法演示 (8邻接):');
-  console.log();
+  // console.log('🔍 详细算法演示 (8邻接):');
+  // console.log();
   
-  demonstrateAlgorithm('A*', findPathHeap, grid, start, goal, true);
-  demonstrateAlgorithm('JPS', findPathJPS, grid, start, goal, true);
-  demonstrateAlgorithm('BFS', findPathBFS, grid, start, goal, true);
-  demonstrateAlgorithm('GBFS', findPathGBFS, grid, start, goal, true);
+  // demonstrateAlgorithm('A*', findPathHeap, grid, start, goal, true);
+  // demonstrateAlgorithm('JPS', findPathJPS, grid, start, goal, true);
+  // demonstrateAlgorithm('BFS', findPathBFS, grid, start, goal, true);
+  // demonstrateAlgorithm('GBFS', findPathGBFS, grid, start, goal, true);
   
   console.log('🎉 演示完成！');
 }

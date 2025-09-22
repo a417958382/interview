@@ -270,13 +270,20 @@ export function findPathDijkstra(
 ): Point[] | null {
   const allowDiagonal = options.allowDiagonal ?? false;
   
+  console.log(`🚀 开始迪克斯特拉算法寻路`);
+  console.log(`📍 起点: (${start.x}, ${start.y})`);
+  console.log(`🎯 终点: (${goal.x}, ${goal.y})`);
+  console.log(`🔀 允许对角线移动: ${allowDiagonal}`);
+  
   // 检查起点和终点是否可通行
   if (!isWalkable(grid, start.x, start.y) || !isWalkable(grid, goal.x, goal.y)) {
+    console.log(`❌ 起点或终点不可通行，寻路失败`);
     return null;
   }
 
   const height = grid.length;
   const width = grid[0]?.length ?? 0;
+  console.log(`🗺️  网格大小: ${width} x ${height}`);
 
   // gScore[y][x]: 从起点到(x,y)的最短距离
   const gScore: number[][] = Array.from({ length: height }, () =>
@@ -295,41 +302,112 @@ export function findPathDijkstra(
   const startNode: NodeRecord = { position: start, gCost: 0 };
   open.push(startNode);
   gScore[start.y][start.x] = 0;
+  
+  console.log(`✅ 初始化完成，起点已加入开放列表`);
+  console.log(`📊 开放列表初始大小: ${open.isEmpty() ? 0 : 1}`);
+
+  let iterationCount = 0;
+  let totalNodesExplored = 0;
 
   // 主循环：Dijkstra算法核心
   while (!open.isEmpty()) {
+    iterationCount++;
+    
     // 取出g值最小的节点
     const current = open.pop() as NodeRecord;
     const { x, y } = current.position;
 
+    console.log(`\n🔄 第 ${iterationCount} 次迭代`);
+    console.log(`📤 从开放列表取出节点: (${x}, ${y}), g值: ${current.gCost.toFixed(2)}`);
+
     // 跳过过期条目（同一位置可能有多个不同g值的条目）
-    if (current.gCost !== gScore[y][x]) continue;
+    if (current.gCost !== gScore[y][x]) {
+      console.log(`⏭️  跳过过期条目，当前g值: ${current.gCost.toFixed(2)}, 记录g值: ${gScore[y][x].toFixed(2)}`);
+      continue;
+    }
     
     // 到达目标，重构路径
     if (x === goal.x && y === goal.y) {
-      return reconstructPath(current);
+      console.log(`🎉 找到目标节点！`);
+      console.log(`📈 总迭代次数: ${iterationCount}`);
+      console.log(`🔍 总探索节点数: ${totalNodesExplored}`);
+      console.log(`📏 最短距离: ${current.gCost.toFixed(2)}`);
+      
+      const path = reconstructPath(current);
+      console.log(`🛤️  路径长度: ${path.length} 个节点`);
+      console.log(`📍 路径: ${path.map(p => `(${p.x},${p.y})`).join(' → ')}`);
+      
+      return path;
     }
 
     // 标记当前节点为已访问
     closed[y][x] = true;
+    totalNodesExplored++;
+    console.log(`✅ 节点 (${x}, ${y}) 已标记为已访问`);
 
     // 检查所有邻居
     const neighbors = getNeighbors(current.position, grid, allowDiagonal);
+    console.log(`🔍 检查 ${neighbors.length} 个邻居节点`);
+    
+    let updatedNeighbors = 0;
     for (const nb of neighbors) {
       // 跳过已访问的节点
-      if (closed[nb.y][nb.x]) continue;
+      if (closed[nb.y][nb.x]) {
+        console.log(`  ⏭️  邻居 (${nb.x}, ${nb.y}) 已访问，跳过`);
+        continue;
+      }
       
       // 计算从起点经过当前节点到邻居的代价
       const tentative = current.gCost + stepCost(current.position, nb);
+      const currentG = gScore[nb.y][nb.x];
+      
+      console.log(`  🔍 邻居 (${nb.x}, ${nb.y}): 当前g值=${currentG === Number.POSITIVE_INFINITY ? '∞' : currentG.toFixed(2)}, 新g值=${tentative.toFixed(2)}`);
       
       // 如果找到更短的路径，更新邻居的g值
       if (tentative < gScore[nb.y][nb.x]) {
         gScore[nb.y][nb.x] = tentative;
         open.push({ position: nb, gCost: tentative, parent: current });
+        updatedNeighbors++;
+        console.log(`    ✅ 更新邻居 (${nb.x}, ${nb.y}) 的g值为 ${tentative.toFixed(2)}，已加入开放列表`);
+      } else {
+        console.log(`    ❌ 新路径不更优，跳过`);
       }
+    }
+    
+    console.log(`📊 本次迭代更新了 ${updatedNeighbors} 个邻居节点`);
+    
+    // 打印开放列表内容（不包含父节点信息）
+    if (!open.isEmpty()) {
+      const openListCopy: NodeRecord[] = [];
+      const tempQueue = new PriorityQueue<NodeRecord>((a, b) => a.gCost - b.gCost);
+      
+      // 复制开放列表内容
+      while (!open.isEmpty()) {
+        const node = open.pop() as NodeRecord;
+        openListCopy.push(node);
+        tempQueue.push(node);
+      }
+      
+      // 恢复开放列表
+      while (!tempQueue.isEmpty()) {
+        open.push(tempQueue.pop() as NodeRecord);
+      }
+      
+      // 按g值排序并打印
+      openListCopy.sort((a, b) => a.gCost - b.gCost);
+      console.log(`📋 开放列表内容 (${openListCopy.length} 个节点):`);
+      openListCopy.forEach((node, index) => {
+        console.log(`  ${index + 1}. (${node.position.x}, ${node.position.y}) - g值: ${node.gCost.toFixed(2)}`);
+      });
+    } else {
+      console.log(`📋 开放列表为空`);
     }
   }
 
+  console.log(`\n❌ 开放列表为空，未找到路径`);
+  console.log(`📈 总迭代次数: ${iterationCount}`);
+  console.log(`🔍 总探索节点数: ${totalNodesExplored}`);
+  
   // 没有找到路径
   return null;
 }
@@ -365,6 +443,11 @@ export function dijkstraAll(
   const height = grid.length;
   const width = grid[0]?.length ?? 0;
 
+  console.log(`🚀 开始迪克斯特拉算法 - 计算到所有点的最短距离`);
+  console.log(`📍 起点: (${start.x}, ${start.y})`);
+  console.log(`🔀 允许对角线移动: ${allowDiagonal}`);
+  console.log(`🗺️  网格大小: ${width} x ${height}`);
+
   // 距离矩阵：存储从起点到每个点的最短距离
   const dist: number[][] = Array.from({ length: height }, () =>
     Array.from({ length: width }, () => Number.POSITIVE_INFINITY)
@@ -387,24 +470,48 @@ export function dijkstraAll(
   if (isWalkable(grid, start.x, start.y)) {
     dist[start.y][start.x] = 0;
     open.push({ position: start, gCost: 0 });
+    console.log(`✅ 起点可通行，已初始化距离为 0`);
+  } else {
+    console.log(`❌ 起点不可通行，无法计算距离`);
+    return { dist, parent };
   }
+
+  let iterationCount = 0;
+  let totalNodesExplored = 0;
+  let totalNodesReachable = 0;
 
   // 主循环：遍历所有可达节点
   while (!open.isEmpty()) {
+    iterationCount++;
+    
     const current = open.pop() as NodeRecord;
     const { x, y } = current.position;
     
     // 跳过已访问的节点
-    if (visited[y][x]) continue;
+    if (visited[y][x]) {
+      console.log(`⏭️  第 ${iterationCount} 次迭代: 节点 (${x}, ${y}) 已访问，跳过`);
+      continue;
+    }
     
     // 跳过过期条目
-    if (current.gCost !== dist[y][x]) continue;
+    if (current.gCost !== dist[y][x]) {
+      console.log(`⏭️  第 ${iterationCount} 次迭代: 节点 (${x}, ${y}) 过期条目，跳过`);
+      continue;
+    }
     
     // 标记为已访问
     visited[y][x] = true;
+    totalNodesExplored++;
+    totalNodesReachable++;
+    
+    if (iterationCount % 10 === 0 || iterationCount <= 5) {
+      console.log(`🔄 第 ${iterationCount} 次迭代: 访问节点 (${x}, ${y}), 距离: ${current.gCost.toFixed(2)}`);
+    }
 
     // 检查所有邻居
     const neighbors = getNeighbors(current.position, grid, allowDiagonal);
+    let updatedNeighbors = 0;
+    
     for (const nb of neighbors) {
       const nx = nb.x, ny = nb.y;
       
@@ -419,8 +526,70 @@ export function dijkstraAll(
         dist[ny][nx] = tentative;
         parent[ny][nx] = { x, y };
         open.push({ position: nb, gCost: tentative });
+        updatedNeighbors++;
       }
     }
+    
+    if (iterationCount % 10 === 0 || iterationCount <= 5) {
+      console.log(`  📊 更新了 ${updatedNeighbors} 个邻居节点`);
+      
+      // 打印开放列表内容（不包含父节点信息）
+      if (!open.isEmpty()) {
+        const openListCopy: NodeRecord[] = [];
+        const tempQueue = new PriorityQueue<NodeRecord>((a, b) => a.gCost - b.gCost);
+        
+        // 复制开放列表内容
+        while (!open.isEmpty()) {
+          const node = open.pop() as NodeRecord;
+          openListCopy.push(node);
+          tempQueue.push(node);
+        }
+        
+        // 恢复开放列表
+        while (!tempQueue.isEmpty()) {
+          open.push(tempQueue.pop() as NodeRecord);
+        }
+        
+        // 按g值排序并打印
+        openListCopy.sort((a, b) => a.gCost - b.gCost);
+        console.log(`  📋 开放列表内容 (${openListCopy.length} 个节点):`);
+        openListCopy.slice(0, 10).forEach((node, index) => {
+          console.log(`    ${index + 1}. (${node.position.x}, ${node.position.y}) - g值: ${node.gCost.toFixed(2)}`);
+        });
+        if (openListCopy.length > 10) {
+          console.log(`    ... 还有 ${openListCopy.length - 10} 个节点`);
+        }
+      } else {
+        console.log(`  📋 开放列表为空`);
+      }
+    }
+  }
+
+  console.log(`\n🎉 迪克斯特拉算法执行完成！`);
+  console.log(`📈 总迭代次数: ${iterationCount}`);
+  console.log(`🔍 总探索节点数: ${totalNodesExplored}`);
+  console.log(`📍 可达节点数: ${totalNodesReachable}`);
+  console.log(`📊 网格总节点数: ${width * height}`);
+  console.log(`📈 探索覆盖率: ${((totalNodesReachable / (width * height)) * 100).toFixed(2)}%`);
+
+  // 统计距离分布
+  const distanceStats = new Map<number, number>();
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      if (dist[y][x] !== Number.POSITIVE_INFINITY) {
+        const roundedDist = Math.round(dist[y][x] * 10) / 10;
+        distanceStats.set(roundedDist, (distanceStats.get(roundedDist) || 0) + 1);
+      }
+    }
+  }
+  
+  console.log(`📊 距离分布统计:`);
+  const sortedDistances = Array.from(distanceStats.entries()).sort((a, b) => a[0] - b[0]);
+  sortedDistances.slice(0, 10).forEach(([distance, count]) => {
+    console.log(`  距离 ${distance}: ${count} 个节点`);
+  });
+  if (sortedDistances.length > 10) {
+    console.log(`  ... 还有 ${sortedDistances.length - 10} 种其他距离`);
   }
 
   return { dist, parent };

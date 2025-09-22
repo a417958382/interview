@@ -120,7 +120,7 @@ function compareAlgorithms(
   console.log();
   
   const algorithms = [
-    { name: 'Dijkstra', fn: findPathDijkstra },
+    // { name: 'Dijkstra', fn: findPathDijkstra },
     { name: 'A*', fn: findPathHeap },
     // { name: 'JPS', fn: findPathJPS },
     // { name: 'BFS', fn: findPathBFS },

@@ -1,0 +1,31 @@
+{
+  "name": "match3-elimination-system",
+  "version": "1.0.0",
+  "description": "消除类游戏核心系统 - 包含匹配检测、消除执行、重力下落和连锁反应",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx ts-node test.ts",
+    "demo": "npx ts-node GameDemo.ts",
+    "build": "tsc",
+    "start": "node test.js",
+    "simple-demo": "node run-demo.js"
+  },
+  "keywords": [
+    "match3",
+    "game",
+    "elimination",
+    "typescript",
+    "game-engine"
+  ],
+  "author": "Match3 System",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "typescript": "^4.9.0",
+    "ts-node": "^10.9.0"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

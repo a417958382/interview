@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路径查找算法可视化</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>路径查找算法可视化</h1>
+            <p>比较 Dijkstra、A* 和 Jump Point Search (JPS) 算法的执行过程</p>
+        </header>
+
+        <div class="controls">
+            <div class="algorithm-selector">
+                <label>选择算法：</label>
+                <select id="algorithmSelect">
+                    <option value="dijkstra">Dijkstra</option>
+                    <option value="astar">A*</option>
+                    <option value="jps">Jump Point Search (JPS)</option>
+                    <option value="bfs">BFS (广度优先搜索)</option>
+                    <option value="dfs">DFS (深度优先搜索)</option>
+                    <option value="gbfs">GBFS (贪婪最佳优先搜索)</option>
+                    <option value="bidirectional">双向搜索</option>
+                </select>
+            </div>
+
+            <div class="speed-control">
+                <label>动画速度：</label>
+                <input type="range" id="speedSlider" min="1" max="20" value="10">
+                <span id="speedValue">10</span>
+            </div>
+
+            <div class="grid-controls">
+                <label>网格大小：</label>
+                <select id="gridSize">
+                    <option value="20">20x20</option>
+                    <option value="30" selected>30x30</option>
+                    <option value="40">40x40</option>
+                </select>
+            </div>
+
+            <div class="action-buttons">
+                <button id="startBtn">开始</button>
+                <button id="pauseBtn" disabled>暂停</button>
+                <button id="resetBtn">重置</button>
+                <button id="clearWallsBtn">清除障碍</button>
+            </div>
+
+            <div class="mode-selector">
+                <label>模式：</label>
+                <button id="wallMode" class="mode-btn active">绘制障碍</button>
+                <button id="startMode" class="mode-btn">设置起点</button>
+                <button id="endMode" class="mode-btn">设置终点</button>
+            </div>
+
+            <div class="diagonal-control">
+                <label>
+                    <input type="checkbox" id="allowDiagonal" checked>
+                    允许对角线移动
+                </label>
+            </div>
+        </div>
+
+        <div class="visualization-container">
+            <div class="grid-container">
+                <canvas id="gridCanvas"></canvas>
+            </div>
+            
+            <div class="stats-panel">
+                <h3>算法统计</h3>
+                <div class="stat-item">
+                    <span class="stat-label">已访问节点：</span>
+                    <span id="visitedCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">路径长度：</span>
+                    <span id="pathLength">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">执行时间：</span>
+                    <span id="executionTime">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">算法状态：</span>
+                    <span id="algorithmStatus">就绪</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <h3>图例</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-color start"></div>
+                    <span>起点</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color end"></div>
+                    <span>终点</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color wall"></div>
+                    <span>障碍物</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color visited"></div>
+                    <span>已访问</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color path"></div>
+                    <span>最终路径</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color current"></div>
+                    <span>当前节点</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="algorithms.js"></script>
+    <script src="additional-algorithms.js"></script>
+    <script src="visualizer.js"></script>
+</body>
+</html>

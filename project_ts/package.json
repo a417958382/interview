@@ -19,7 +19,17 @@
     "test-shuffle": "tsx src/test-shuffle-algorithms.ts",
     "test-fishing": "tsx src/test-fishing-game-algorithms.ts",
     "test-match3": "tsx src/test-match3-game-algorithms.ts",
-    "test-slg": "tsx src/test-slg-game-algorithms.ts"
+    "test-slg": "tsx src/test-slg-game-algorithms.ts",
+    "test-pathfinding": "tsx src/test-pathfinding-algorithms.ts",
+    "test-dijkstra": "tsx -e \"import { findPathDijkstra } from './src/dijkstra'; console.log('Dijkstra算法测试');\"",
+    "test-astar": "tsx -e \"import { findPathHeap } from './src/astar_heap'; console.log('A*算法测试');\"",
+    "test-jps": "tsx -e \"import { findPathJPS } from './src/astar_jps'; console.log('JPS算法测试');\"",
+    "test-bfs": "tsx -e \"import { findPathBFS } from './src/bfs'; console.log('BFS算法测试');\"",
+    "test-dfs": "tsx -e \"import { findPathDFS } from './src/dfs'; console.log('DFS算法测试');\"",
+    "test-gbfs": "tsx -e \"import { findPathGBFS } from './src/gbfs'; console.log('GBFS算法测试');\"",
+    "test-bidirectional": "tsx -e \"import { findPathBidirectional } from './src/bidirectional-search'; console.log('双向搜索算法测试');\"",
+    "demo-pathfinding": "tsx src/pathfinding-demo.ts",
+    "docs-pathfinding": "echo '路径查找算法文档:' && echo '1. 详细对比分析: Pathfinding-Algorithms-Comparison.md' && echo '2. 快速参考: Pathfinding-Quick-Reference.md' && echo '3. 决策指南: Pathfinding-Decision-Guide.md' && echo '4. 使用说明: README-Pathfinding.md'"
   },
   "keywords": [],
   "author": "",
